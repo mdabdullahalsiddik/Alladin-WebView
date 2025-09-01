@@ -8,7 +8,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class YouTubeView extends StatefulWidget {
-  final String url = "https://www.youtube.com/@coderangon";
+  final String url = "https://www.youtube.com/@NaturalTV2023";
 
   const YouTubeView({super.key});
 
