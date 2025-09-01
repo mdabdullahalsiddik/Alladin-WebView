@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ndpl/app/core/constant/assets.dart';
 import 'package:ndpl/app/core/utils/network_checker.dart';
 import 'package:ndpl/app/core/utils/snackbar_message.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -142,12 +143,8 @@ class _HomeViewState extends State<HomeView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("assets/gif_image.gif", height: 250, width: 250, fit: BoxFit.cover),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "Please Wait...",
-                        style: TextStyle(color: Colors.cyan, fontSize: 20, fontStyle: FontStyle.italic),
-                      ),
+                      Image.asset(AppAssets.logo, height: 250, width: 250, fit: BoxFit.cover),
+                     
                     ],
                   ),
                 ),

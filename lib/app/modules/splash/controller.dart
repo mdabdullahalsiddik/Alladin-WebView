@@ -6,8 +6,6 @@ import 'package:ndpl/app/core/utils/settings.dart';
 import 'package:ndpl/app/routes/app_route.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../data/local/storage.dart';
-
 class SplashController extends GetxController {
   RxString appVersion = ''.obs;
   var status;
@@ -15,22 +13,22 @@ class SplashController extends GetxController {
     fetchAppVersion();
 
     await Future.delayed(const Duration(seconds: 3));
+    Get.offAllNamed(AppRoutes.navBar);
+    // status = await LocalData().readData(key: "isLogin");
+    // var isWelcome = await LocalData().readData(key: 'isWelcome');
+    // log("===++===$isWelcome=========++====");
+    // log("======$status=============");
 
-    status = await LocalData().readData(key: "isLogin");
-    var isWelcome = await LocalData().readData(key: 'isWelcome');
-    log("===++===$isWelcome=========++====");
-    log("======$status=============");
-
-    if (isWelcome == "true") {
-      if (status == "true") {
-        Get.offAllNamed(AppRoutes.navBar);
-      } else {
-        // Get.offAllNamed(AppRoutes.login);
-        Get.offAllNamed(AppRoutes.navBar);
-      }
-    } else {
-      Get.offAllNamed(AppRoutes.welcome);
-    }
+    // if (isWelcome == "true") {
+    //   if (status == "true") {
+    //     Get.offAllNamed(AppRoutes.navBar);
+    //   } else {
+    //     // Get.offAllNamed(AppRoutes.login);
+    //     Get.offAllNamed(AppRoutes.navBar);
+    //   }
+    // } else {
+    //   Get.offAllNamed(AppRoutes.welcome);
+    // }
   }
 
   void fetchAppVersion() async {

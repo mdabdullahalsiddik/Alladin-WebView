@@ -38,7 +38,7 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
                       context: context,
                       logo: AppAssets.facebookIcon,
                       status: controller.selectedPos.value == 1 ? true : false,
-                      title: 'Facebook',
+                      title: 'Social',
                       onTap: () {
                         controller.selectedPos.value = 1;
                       },
@@ -49,7 +49,7 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
                       context: context,
                       logo: AppAssets.youtubeIcon,
                       status: controller.selectedPos.value == 2 ? true : false,
-                      title: 'YouTube',
+                      title: 'Channel',
                       onTap: () {
                         controller.selectedPos.value = 2;
                       },
@@ -60,7 +60,7 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
                       context: context,
                       logo: AppAssets.paymentIcon,
                       status: controller.selectedPos.value == 3 ? true : false,
-                      title: 'Payments',
+                      title: 'Payment',
                       onTap: () {
                         controller.selectedPos.value = 3;
                       },
@@ -71,7 +71,7 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
                       context: context,
                       logo: AppAssets.offerIcon,
                       status: controller.selectedPos.value == 4 ? true : false,
-                      title: 'Offer',
+                      title: 'Our Project',
                       onTap: () {
                         controller.selectedPos.value = 4;
                       },

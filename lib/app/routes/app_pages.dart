@@ -8,6 +8,10 @@ import 'package:ndpl/app/core/bindings/welcome.dart';
 import 'package:ndpl/app/core/bindings/youtube.dart';
 import 'package:ndpl/app/modules/bottom_navbar/view.dart';
 import 'package:ndpl/app/modules/facebook/view.dart';
+import 'package:ndpl/app/core/bindings/offer.dart';
+import 'package:ndpl/app/modules/offer/view.dart';
+import 'package:ndpl/app/modules/payment/payment.dart';
+import 'package:ndpl/app/modules/payment/view.dart';
 import 'package:ndpl/app/modules/splash/view.dart';
 import 'package:ndpl/app/modules/upcoming/view.dart';
 import 'package:ndpl/app/modules/welcome/view.dart';
@@ -27,5 +31,7 @@ class AppPages {
     GetPage(name: AppRoutes.youtube, page: () => YouTubeView(), binding: YouTubeBinding()),
     GetPage(name: AppRoutes.youtube, page: () => YouTubeView(), binding: FacebookBinding()),
     GetPage(name: AppRoutes.upcoming, page: () => UpcomingView(), binding: UpcomingBinding()),
+    GetPage(name: AppRoutes.payment, page: () => PaymentView(), binding: PaymentBinding()),
+    GetPage(name: AppRoutes.offer, page: () => OfferView(), binding: OfferBinding()),
   ];
 }

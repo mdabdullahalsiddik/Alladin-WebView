@@ -17,7 +17,7 @@ class SplashView extends GetView<SplashController> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(child: Image.asset(AppAssets.gif, height: MediaQuery.of(context).size.height / 2.5)),
+      body: Center(child: Image.asset(AppAssets.logo, height: MediaQuery.of(context).size.height / 2.5)),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         height: 30,

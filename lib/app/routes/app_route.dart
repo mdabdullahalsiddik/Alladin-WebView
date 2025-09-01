@@ -6,5 +6,7 @@ abstract class AppRoutes {
   static const youtube = '/youtube';
   static const welcome = '/welcome';
   static const upcoming = '/upcoming';
+  static const payment = '/payment';
+  static const offer = '/offer';
  
 }
