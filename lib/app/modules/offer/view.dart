@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ndpl/app/global_widgets/app_text.dart';
-import 'package:ndpl/app/modules/notifications_view/view.dart';
+import 'package:ndpl/app/modules/offer_view/view.dart';
 import 'package:ndpl/app/modules/offer/controller.dart';
 
 class OfferView extends GetView<OfferController> {

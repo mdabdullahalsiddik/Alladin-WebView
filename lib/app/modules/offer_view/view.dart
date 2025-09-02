@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ndpl/app/core/constant/assets.dart';
+import 'package:ndpl/app/core/utils/url_luncher.dart';
 import 'package:ndpl/app/global_widgets/app_text.dart';
 import 'package:ndpl/app/modules/offer/controller.dart';
 
@@ -13,6 +15,20 @@ class OfferDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Our Project Details".tr), elevation: 0),
+      floatingActionButton: RawMaterialButton(
+        onPressed: () {
+          UrlLuncherController().openWhatsApp('+8801975580600');
+        },
+        shape: const CircleBorder(), // Makes it circular
+        padding: EdgeInsets.zero, // Removes default padding
+        child: Image.asset(
+          AppAssets.whatsappIcon, // Your WhatsApp icon
+          height: 60, // Adjust size
+          width: 60,
+          fit: BoxFit.cover,
+        ),
+      ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),

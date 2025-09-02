@@ -100,11 +100,11 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
             color: status ? Theme.of(context).primaryColor : Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-              child: Image.asset(logo, color: status ? Colors.white : Colors.black, height: 20, width: 20),
+              child: Image.asset(logo, color: status ? Colors.white : Colors.red, height: 20, width: 20),
             ),
           ),
           const SizedBox(height: 2),
-          CustomText(title, color: status ? Theme.of(context).primaryColor : Colors.black, weight: FontWeight.w400, size: 12),
+          CustomText(title, color: status ? Theme.of(context).primaryColor : Colors.red, weight: FontWeight.bold, size: 12),
         ],
       ),
     );

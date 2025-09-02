@@ -15,4 +15,5 @@ class AppAssets {
   static const String paymentIcon = 'assets/icons/payment.png';
   static const String youtubeIcon = 'assets/icons/youtube.png';
   static const String backIcon = 'assets/icons/back.png';
+  static const String whatsappIcon = 'assets/icons/whatsapp.png';
 }
