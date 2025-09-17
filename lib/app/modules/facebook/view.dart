@@ -21,14 +21,7 @@ class FacebookView extends StatelessWidget {
           backgroundColor: Colors.white,
           body: Obx(() {
             if (controller.isLoading.value) {
-              return Center(
-                child: Image.asset(
-                  AppAssets.logo,
-                  height: 250,
-                  width: 250,
-                  fit: BoxFit.cover,
-                ),
-              );
+              return Center(child: Image.asset(AppAssets.logo, height: 250, width: 250, fit: BoxFit.cover));
             }
 
             if (!controller.hasInternetConnection.value) {
@@ -38,16 +31,9 @@ class FacebookView extends StatelessWidget {
                   children: [
                     const Icon(Icons.wifi_off, color: Colors.red, size: 50),
                     const SizedBox(height: 10),
-                    const Text(
-                      "Please, Check Internet Connection",
-                      style: TextStyle(color: Colors.blueGrey, fontSize: 16),
-                    ),
+                    const Text("Please, Check Internet Connection", style: TextStyle(color: Colors.blueGrey, fontSize: 16)),
                     const SizedBox(height: 20),
-                    ElevatedButton.icon(
-                      onPressed: controller.reloadPage,
-                      icon: const Icon(Icons.refresh),
-                      label: const Text("Reload"),
-                    ),
+                    ElevatedButton.icon(onPressed: controller.reloadPage, icon: const Icon(Icons.refresh), label: const Text("Reload")),
                   ],
                 ),
               );

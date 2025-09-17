@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -17,36 +18,38 @@ class FacebookController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    webViewController = WebViewController();
-    _checkInternetAndLoad();
 
+    webViewController = WebViewController();
+
+    // Android-specific setup
     if (webViewController.platform is AndroidWebViewController) {
+      final androidController =
+          webViewController.platform as AndroidWebViewController;
       AndroidWebViewController.enableDebugging(true);
-      (webViewController.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
+      androidController.setMediaPlaybackRequiresUserGesture(false);
     }
+
+    _checkInternetAndLoad();
   }
 
   Future<void> _checkInternetAndLoad() async {
     isLoading.value = true;
-
     bool status = await ConnectionChecker.checkConnection();
-    await Future.delayed(const Duration(milliseconds: 500));
-
     hasInternetConnection.value = status;
 
-    if (hasInternetConnection.value) {
+    if (status) {
       loadWebView(url);
     } else {
       CommonSnackBarMessage.noInternetConnection();
+      isLoading.value = false;
     }
-
-    isLoading.value = false;
   }
 
   void loadWebView(String url, {bool isBack = false}) {
     if (!isBack) {
-      historyLinks.add(url);
+      if (historyLinks.isEmpty || historyLinks.last != url) {
+        historyLinks.add(url);
+      }
     } else if (historyLinks.isNotEmpty) {
       historyLinks.removeLast();
     }
@@ -56,10 +59,9 @@ class FacebookController extends GetxController {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (_) {},
-          onPageStarted: (_) {},
-          onPageFinished: (_) {},
-          onWebResourceError: (_) {},
+          onPageStarted: (_) => isLoading.value = true,
+          onPageFinished: (_) => isLoading.value = false,
+          onWebResourceError: (_) => isLoading.value = false,
           onNavigationRequest: (request) => NavigationDecision.navigate,
         ),
       )
@@ -73,7 +75,7 @@ class FacebookController extends GetxController {
 
   Future<void> onBackPressed() async {
     if (historyLinks.length > 1) {
-      loadWebView(historyLinks.last, isBack: true);
+      loadWebView(historyLinks[historyLinks.length - 2], isBack: true);
     } else {
       Get.defaultDialog(
         title: 'Confirmation',
@@ -94,7 +96,7 @@ class FacebookController extends GetxController {
             ),
           ),
           GestureDetector(
-            onTap: () => Get.back(closeOverlays: true),
+            onTap: () => SystemNavigator.pop(),
             child: Container(
               height: 35,
               width: 80,

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:ndpl/app/modules/facebook/controller.dart';
 import 'package:ndpl/app/modules/youtube/controller.dart';
 
 class YouTubeBinding implements Bindings {

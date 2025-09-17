@@ -25,6 +25,8 @@ dependencies:
   connectivity_plus: ^6.1.5
   webview_flutter: ^4.13.0
 
+  http: any
+  webview_flutter_android: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

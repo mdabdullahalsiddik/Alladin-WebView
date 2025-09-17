@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:ndpl/app/modules/offer/notification.dart';
+import 'package:ndpl/app/data/model/offer.dart';
+import 'package:ndpl/app/data/services/api/offer.dart';
 
 class OfferController extends GetxController {
-  var offers = <Map<String, dynamic>>[].obs;
+  var offers = <OfferModel>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -14,8 +15,8 @@ class OfferController extends GetxController {
   void fetchOffers() async {
     try {
       isLoading.value = true;
-      await Future.delayed(const Duration(seconds: 1)); // simulate API call
-      offers.value = OfferListDatas.data;
+
+      offers.value = await OfferService.service();
     } finally {
       isLoading.value = false;
     }

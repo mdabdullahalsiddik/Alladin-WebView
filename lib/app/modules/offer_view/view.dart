@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ndpl/app/core/constant/assets.dart';
 import 'package:ndpl/app/core/utils/url_luncher.dart';
+import 'package:ndpl/app/data/model/offer.dart';
 import 'package:ndpl/app/global_widgets/app_text.dart';
 import 'package:ndpl/app/modules/offer/controller.dart';
 
 class OfferDetailView extends StatelessWidget {
-  final Map<String, dynamic> offer;
+  final OfferModel offer;
   OfferDetailView({super.key, required this.offer});
 
   final OfferController controller = Get.find();
@@ -35,14 +36,15 @@ class OfferDetailView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Banner Image
-              if (offer['banner'] != null && offer['banner'] != "")
+              // bannerUrl Image
+              if (offer.bannerUrl != null && offer.bannerUrl != "")
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
-                    offer['banner'],
+                    offer.bannerUrl ?? '',
+                    height: 200,
                     width: double.infinity,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         height: 200,
@@ -53,14 +55,14 @@ class OfferDetailView extends StatelessWidget {
                     },
                   ),
                 ),
-              if (offer['banner'] != null && offer['banner'] != "") const SizedBox(height: 16),
+              if (offer.bannerUrl != null && offer.bannerUrl != "") const SizedBox(height: 16),
 
               // Title
-              CustomText(offer['title'] ?? '', size: 16, weight: FontWeight.w600, align: TextAlign.start),
+              CustomText(offer.title ?? '', size: 16, weight: FontWeight.w600, align: TextAlign.start),
               const SizedBox(height: 12),
 
               // Description
-              CustomText(offer['description'] ?? '', size: 14, weight: FontWeight.w400, align: TextAlign.start),
+              CustomText(offer.description ?? '', size: 14, weight: FontWeight.w400, align: TextAlign.start),
             ],
           ),
         ),

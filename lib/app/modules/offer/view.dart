@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ndpl/app/data/model/offer.dart';
 import 'package:ndpl/app/global_widgets/app_text.dart';
 import 'package:ndpl/app/modules/offer_view/view.dart';
 import 'package:ndpl/app/modules/offer/controller.dart';
@@ -39,7 +40,7 @@ class OfferView extends GetView<OfferController> {
     );
   }
 
-  Widget buildOfferItem(Map<String, dynamic> item, BuildContext context) {
+  Widget buildOfferItem(OfferModel item, BuildContext context) {
     return GestureDetector(
       onTap: () {
         Get.to(() => OfferDetailView(offer: item));
@@ -56,14 +57,14 @@ class OfferView extends GetView<OfferController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (item['banner'] != null && item['banner'] != "")
+            if (item.bannerUrl != null && item.bannerUrl != "")
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  item['banner'],
+                  item.bannerUrl ?? '',
                   height: 160,
                   width: double.infinity,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       height: 160,
@@ -74,10 +75,10 @@ class OfferView extends GetView<OfferController> {
                   },
                 ),
               ),
-            if (item['banner'] != null && item['banner'] != "") const SizedBox(height: 10),
-            CustomText(item['title'] ?? '', size: 14, weight: FontWeight.w600, align: TextAlign.start),
+            if ( item.bannerUrl != null &&  item.bannerUrl != "") const SizedBox(height: 10),
+            CustomText(item.title ?? '', size: 14, weight: FontWeight.w600, align: TextAlign.start),
             const SizedBox(height: 9),
-            CustomText(item['description'] ?? '', size: 13, weight: FontWeight.w400, align: TextAlign.start, maxLines: 2),
+            CustomText(item.description ?? '', size: 13, weight: FontWeight.w400, align: TextAlign.start, maxLines: 2),
           ],
         ),
       ),

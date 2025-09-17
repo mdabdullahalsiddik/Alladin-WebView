@@ -9,27 +9,19 @@ class YouTubeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final YoutubeController controller = Get.put(YoutubeController());
+    final controller = Get.put(YoutubeController());
 
     return SafeArea(
-      child: PopScope(
-        canPop: false,
-        onPopInvoked: (_) => controller.onBackPressed(context),
+      child: WillPopScope(
+        onWillPop: () async {
+          await controller.onBackPressed(context);
+          return false;
+        },
         child: Obx(() {
           if (controller.isLoading.value) {
             return Scaffold(
               backgroundColor: Colors.white,
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppAssets.logo,
-                        height: 250, width: 250, fit: BoxFit.cover),
-                    const SizedBox(height: 20),
-                    const CircularProgressIndicator(color: Colors.blue),
-                  ],
-                ),
-              ),
+              body: Center(child: Image.asset(AppAssets.logo, height: 250, width: 250, fit: BoxFit.cover)),
             );
           }
 
@@ -38,22 +30,13 @@ class YouTubeView extends StatelessWidget {
               backgroundColor: Colors.white,
               body: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.wifi_off, color: Colors.red, size: 50),
                     const SizedBox(height: 10),
-                    const Text("Please, Check Internet Connection",
-                        style:
-                            TextStyle(color: Colors.blueGrey, fontSize: 15)),
-                    SizedBox(height: MediaQuery.sizeOf(context).height / 3),
-                    InkWell(
-                      onTap: controller.checkInternetAndLoad,
-                      child: const Icon(Icons.refresh, size: 40),
-                    ),
-                    const Text("Reload",
-                        style:
-                            TextStyle(color: Colors.blueGrey, fontSize: 15)),
-                    SizedBox(height: MediaQuery.sizeOf(context).height / 10),
+                    const Text("Please, Check Internet Connection", style: TextStyle(color: Colors.blueGrey, fontSize: 16)),
+                    const SizedBox(height: 20),
+                    ElevatedButton.icon(onPressed: controller.reloadPage, icon: const Icon(Icons.refresh), label: const Text("Reload")),
                   ],
                 ),
               ),
