@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ndpl/app/core/utils/network_checker.dart';
 import 'package:ndpl/app/core/utils/snackbar_message.dart';
+import 'package:ndpl/app/data/services/api/status.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
+/// HomeController for WebView
 class HomeController extends GetxController {
   final String url = "https://naturaldpl.com";
+  final String url2 = "https://www.classicit.com.bd";
 
   late WebViewController webViewController;
   RxBool isLoading = true.obs;
@@ -18,12 +21,11 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // Initialize WebViewController with correct Android setup
+    // Initialize WebViewController with Android setup
     webViewController = WebViewController();
 
     if (webViewController.platform is AndroidWebViewController) {
-      final androidController =
-          webViewController.platform as AndroidWebViewController;
+      final androidController = webViewController.platform as AndroidWebViewController;
       AndroidWebViewController.enableDebugging(true);
       androidController.setMediaPlaybackRequiresUserGesture(false);
     }
@@ -49,20 +51,32 @@ class HomeController extends GetxController {
     checkInternetAndLoad();
   }
 
+  /// Check internet and API status, then load appropriate URL
   Future<void> checkInternetAndLoad() async {
     isLoading.value = true;
-    bool status = await ConnectionChecker.checkConnection();
-    await Future.delayed(const Duration(seconds: 1));
-    hasInternetConnection.value = status;
 
-    if (status) {
-      webViewController.loadRequest(Uri.parse(url));
-    } else {
+    bool internetStatus = await ConnectionChecker.checkConnection();
+    hasInternetConnection.value = internetStatus;
+
+    if (!internetStatus) {
+      await Future.delayed(const Duration(seconds: 1));
       CommonSnackBarMessage.noInternetConnection();
       isLoading.value = false;
+      return;
     }
+
+    // Check API status
+    bool apiStatus = await WebStatusService.service();
+    await Future.delayed(const Duration(seconds: 1));
+
+    // Decide which URL to load
+    final Uri uriToLoad = apiStatus ? Uri.parse(url2) : Uri.parse(url);
+
+    webViewController.loadRequest(uriToLoad);
+    isLoading.value = false;
   }
 
+  /// Handle back button pressed
   Future<void> onBackPressed(BuildContext context) async {
     if (links.length > 1) {
       links.removeLast();
@@ -78,8 +92,7 @@ class HomeController extends GetxController {
             child: Container(
               height: 30,
               width: 70,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(8)),
               child: const Center(
                 child: Text('Cancel', style: TextStyle(color: Colors.white)),
               ),
@@ -91,8 +104,7 @@ class HomeController extends GetxController {
             child: Container(
               height: 30,
               width: 70,
-              decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
               child: const Center(
                 child: Text('Yes', style: TextStyle(color: Colors.white)),
               ),

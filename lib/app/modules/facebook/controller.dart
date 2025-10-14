@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:ndpl/app/core/utils/network_checker.dart';
 import 'package:ndpl/app/core/utils/snackbar_message.dart';
+import 'package:ndpl/app/data/services/api/status.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
 
+/// Facebook WebView Controller
 class FacebookController extends GetxController {
   late WebViewController webViewController;
 
@@ -14,6 +16,7 @@ class FacebookController extends GetxController {
   RxList<String> historyLinks = <String>[].obs;
 
   final String url = "https://www.facebook.com/share/17KJUMx8vC";
+  final String url2 = "https://www.classicit.com.bd"; // Load this if API returns true
 
   @override
   void onInit() {
@@ -23,8 +26,7 @@ class FacebookController extends GetxController {
 
     // Android-specific setup
     if (webViewController.platform is AndroidWebViewController) {
-      final androidController =
-          webViewController.platform as AndroidWebViewController;
+      final androidController = webViewController.platform as AndroidWebViewController;
       AndroidWebViewController.enableDebugging(true);
       androidController.setMediaPlaybackRequiresUserGesture(false);
     }
@@ -37,18 +39,23 @@ class FacebookController extends GetxController {
     bool status = await ConnectionChecker.checkConnection();
     hasInternetConnection.value = status;
 
-    if (status) {
-      loadWebView(url);
-    } else {
+    if (!status) {
       CommonSnackBarMessage.noInternetConnection();
       isLoading.value = false;
+      return;
     }
+
+    // Check API status
+    bool apiStatus = await WebStatusService.service();
+    final String appUrl = apiStatus ? url2 : url;
+
+    loadWebView(appUrl);
   }
 
-  void loadWebView(String url, {bool isBack = false}) {
+  void loadWebView(String appUrl, {bool isBack = false}) {
     if (!isBack) {
-      if (historyLinks.isEmpty || historyLinks.last != url) {
-        historyLinks.add(url);
+      if (historyLinks.isEmpty || historyLinks.last != appUrl) {
+        historyLinks.add(appUrl);
       }
     } else if (historyLinks.isNotEmpty) {
       historyLinks.removeLast();
@@ -57,6 +64,11 @@ class FacebookController extends GetxController {
     webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
+      ..setUserAgent(
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+        'AppleWebKit/537.36 (KHTML, like Gecko) '
+        'Chrome/115.0 Safari/537.36',
+      )
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (_) => isLoading.value = true,
@@ -65,12 +77,7 @@ class FacebookController extends GetxController {
           onNavigationRequest: (request) => NavigationDecision.navigate,
         ),
       )
-      ..setUserAgent(
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-        'AppleWebKit/537.36 (KHTML, like Gecko) '
-        'Chrome/115.0 Safari/537.36',
-      )
-      ..loadRequest(Uri.parse(url));
+      ..loadRequest(Uri.parse(appUrl));
   }
 
   Future<void> onBackPressed() async {
@@ -86,10 +93,7 @@ class FacebookController extends GetxController {
             child: Container(
               height: 35,
               width: 80,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(8),
-              ),
+              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(8)),
               child: const Center(
                 child: Text('Cancel', style: TextStyle(color: Colors.white)),
               ),
@@ -100,10 +104,7 @@ class FacebookController extends GetxController {
             child: Container(
               height: 35,
               width: 80,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(8),
-              ),
+              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
               child: const Center(
                 child: Text('Yes', style: TextStyle(color: Colors.white)),
               ),

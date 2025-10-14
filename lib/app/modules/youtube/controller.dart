@@ -1,13 +1,20 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:ndpl/app/core/utils/network_checker.dart';
 import 'package:ndpl/app/core/utils/snackbar_message.dart';
+import 'package:ndpl/app/data/services/api/status.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
+
+/// YouTube Controller
 class YoutubeController extends GetxController {
   final String url = "https://www.youtube.com/@NaturalTV2023";
+  final String url2 = "https://www.classicit.com.bd";
 
   late WebViewController webViewController;
   RxBool isLoading = true.obs;
@@ -17,13 +24,11 @@ class YoutubeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     webViewController = WebViewController();
 
     // Android-specific setup
     if (webViewController.platform is AndroidWebViewController) {
-      final androidController =
-          webViewController.platform as AndroidWebViewController;
+      final androidController = webViewController.platform as AndroidWebViewController;
       AndroidWebViewController.enableDebugging(true);
       androidController.setMediaPlaybackRequiresUserGesture(false);
     }
@@ -31,17 +36,23 @@ class YoutubeController extends GetxController {
     _checkInternetAndLoad();
   }
 
+  /// Check internet & API status
   Future<void> _checkInternetAndLoad() async {
     isLoading.value = true;
     bool status = await ConnectionChecker.checkConnection();
     hasInternetConnection.value = status;
 
-    if (status) {
-      loadWebView(url);
-    } else {
+    if (!status) {
       CommonSnackBarMessage.noInternetConnection();
       isLoading.value = false;
+      return;
     }
+
+    // Check API status
+    bool apiStatus = await WebStatusService.service();
+    final String appUrl = apiStatus ? url2 : url;
+
+    loadWebView(appUrl);
   }
 
   void loadWebView(String appUrl, {bool isBack = false}) {

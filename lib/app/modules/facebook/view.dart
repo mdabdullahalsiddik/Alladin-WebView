@@ -17,15 +17,29 @@ class FacebookView extends StatelessWidget {
           await controller.onBackPressed();
           return false;
         },
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: Obx(() {
-            if (controller.isLoading.value) {
-              return Center(child: Image.asset(AppAssets.logo, height: 250, width: 250, fit: BoxFit.cover));
-            }
+        child: Obx(() {
+          // Loading overlay
+          if (controller.isLoading.value) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(AppAssets.logo, height: 250, width: 250, fit: BoxFit.cover),
+                    const SizedBox(height: 20),
+                    const CircularProgressIndicator(),
+                  ],
+                ),
+              ),
+            );
+          }
 
-            if (!controller.hasInternetConnection.value) {
-              return Center(
+          // No internet
+          if (!controller.hasInternetConnection.value) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -36,12 +50,21 @@ class FacebookView extends StatelessWidget {
                     ElevatedButton.icon(onPressed: controller.reloadPage, icon: const Icon(Icons.refresh), label: const Text("Reload")),
                   ],
                 ),
-              );
-            }
+              ),
+            );
+          }
 
-            return WebViewWidget(controller: controller.webViewController);
-          }),
-        ),
+          // Show WebView if URL is loaded
+          if (controller.historyLinks.isNotEmpty) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: WebViewWidget(controller: controller.webViewController),
+            );
+          }
+
+          // Fallback blank
+          return const Scaffold(backgroundColor: Colors.white, body: SizedBox.shrink());
+        }),
       ),
     );
   }

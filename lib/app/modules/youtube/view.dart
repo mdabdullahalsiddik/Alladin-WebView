@@ -18,13 +18,29 @@ class YouTubeView extends StatelessWidget {
           return false;
         },
         child: Obx(() {
+          // Loading overlay
           if (controller.isLoading.value) {
             return Scaffold(
               backgroundColor: Colors.white,
-              body: Center(child: Image.asset(AppAssets.logo, height: 250, width: 250, fit: BoxFit.cover)),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      AppAssets.logo,
+                      height: 250,
+                      width: 250,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(height: 20),
+                    const CircularProgressIndicator(),
+                  ],
+                ),
+              ),
             );
           }
 
+          // No internet
           if (!controller.hasInternetConnection.value) {
             return Scaffold(
               backgroundColor: Colors.white,
@@ -34,18 +50,34 @@ class YouTubeView extends StatelessWidget {
                   children: [
                     const Icon(Icons.wifi_off, color: Colors.red, size: 50),
                     const SizedBox(height: 10),
-                    const Text("Please, Check Internet Connection", style: TextStyle(color: Colors.blueGrey, fontSize: 16)),
+                    const Text(
+                      "Please, Check Internet Connection",
+                      style: TextStyle(color: Colors.blueGrey, fontSize: 16),
+                    ),
                     const SizedBox(height: 20),
-                    ElevatedButton.icon(onPressed: controller.reloadPage, icon: const Icon(Icons.refresh), label: const Text("Reload")),
+                    ElevatedButton.icon(
+                      onPressed: controller.reloadPage,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text("Reload"),
+                    ),
                   ],
                 ),
               ),
             );
           }
 
-          return Scaffold(
+          // Show WebView only if URL is loaded
+          if (controller.links.isNotEmpty) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: WebViewWidget(controller: controller.webViewController),
+            );
+          }
+
+          // Default fallback (blank)
+          return const Scaffold(
             backgroundColor: Colors.white,
-            body: WebViewWidget(controller: controller.webViewController),
+            body: SizedBox.shrink(),
           );
         }),
       ),

@@ -22,8 +22,11 @@ class HomeView extends StatelessWidget {
             backgroundColor: Colors.white,
             body: Stack(
               children: [
-                // WebView
-                WebViewWidget(controller: controller.webViewController),
+                // Show WebView only if URL is loaded
+                if (controller.links.isNotEmpty)
+                  Positioned.fill(
+                    child: WebViewWidget(controller: controller.webViewController),
+                  ),
 
                 // Loading indicator
                 if (controller.isLoading.value)
@@ -39,7 +42,8 @@ class HomeView extends StatelessWidget {
                             width: 250,
                             fit: BoxFit.cover,
                           ),
-                         
+                          const SizedBox(height: 20),
+                          const CircularProgressIndicator(),
                         ],
                       ),
                     ),
