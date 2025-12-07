@@ -3,14 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ndpl/app/core/utils/network_checker.dart';
 import 'package:ndpl/app/core/utils/snackbar_message.dart';
-import 'package:ndpl/app/data/services/api/status.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 /// HomeController for WebView
 class HomeController extends GetxController {
-  final String url = "https://naturaldpl.com";
-  final String url2 = "https://www.classicit.com.bd";
+  final String url = "https://wajibmotors.classicecommerce.com/";
+  // final String url2 = "https://www.classicit.com.bd";
 
   late WebViewController webViewController;
   RxBool isLoading = true.obs;
@@ -65,12 +64,10 @@ class HomeController extends GetxController {
       return;
     }
 
-    // Check API status
-    bool apiStatus = await WebStatusService.service();
     await Future.delayed(const Duration(seconds: 1));
 
     // Decide which URL to load
-    final Uri uriToLoad = apiStatus ? Uri.parse(url2) : Uri.parse(url);
+    final Uri uriToLoad = Uri.parse(url);
 
     webViewController.loadRequest(uriToLoad);
     isLoading.value = false;
