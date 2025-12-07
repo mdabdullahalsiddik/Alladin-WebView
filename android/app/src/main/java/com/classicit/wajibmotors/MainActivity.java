@@ -1,4 +1,4 @@
-package com.classicit.ndpl;
+package com.classicit.wajibmotors;
 
 import io.flutter.embedding.android.FlutterActivity;
 

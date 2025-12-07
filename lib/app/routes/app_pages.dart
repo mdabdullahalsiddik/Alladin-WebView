@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:ndpl/app/core/bindings/home.dart';
-import 'package:ndpl/app/core/bindings/initial.dart';
-import 'package:ndpl/app/core/bindings/upcoming_bindings.dart';
-import 'package:ndpl/app/modules/splash/view.dart';
-import 'package:ndpl/app/modules/upcoming/view.dart';
+import 'package:wajibmotors/app/core/bindings/home.dart';
+import 'package:wajibmotors/app/core/bindings/initial.dart';
+import 'package:wajibmotors/app/core/bindings/upcoming_bindings.dart';
+import 'package:wajibmotors/app/modules/splash/view.dart';
+import 'package:wajibmotors/app/modules/upcoming/view.dart';
 
 import '../modules/home/view.dart';
 import 'app_route.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ndpl/app/global_widgets/app_text.dart';
+import 'package:wajibmotors/app/global_widgets/app_text.dart';
 
 void CustomDialog(
   BuildContext context, {

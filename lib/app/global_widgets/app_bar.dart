@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ndpl/app/core/constant/assets.dart';
-import 'package:ndpl/app/global_widgets/app_text.dart';
+import 'package:wajibmotors/app/core/constant/assets.dart';
+import 'package:wajibmotors/app/global_widgets/app_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

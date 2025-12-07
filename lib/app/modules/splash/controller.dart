@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ndpl/app/core/utils/settings.dart';
-import 'package:ndpl/app/routes/app_route.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:wajibmotors/app/core/utils/settings.dart';
+import 'package:wajibmotors/app/routes/app_route.dart';
 
 class SplashController extends GetxController {
   RxString appVersion = ''.obs;

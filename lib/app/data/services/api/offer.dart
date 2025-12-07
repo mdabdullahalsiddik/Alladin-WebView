@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:ndpl/app/data/model/offer.dart';
+import 'package:wajibmotors/app/data/model/offer.dart';
 
 class OfferService {
   static Future<List<OfferModel>> service() async {

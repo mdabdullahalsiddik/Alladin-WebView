@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:ndpl/app/core/utils/network_checker.dart';
-import 'package:ndpl/app/core/utils/snackbar_message.dart';
+import 'package:wajibmotors/app/core/utils/network_checker.dart';
+import 'package:wajibmotors/app/core/utils/snackbar_message.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 

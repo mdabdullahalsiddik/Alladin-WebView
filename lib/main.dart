@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-
-import 'package:ndpl/app/core/utils/url_luncher.dart';
-import 'package:ndpl/app/data/local/storage.dart';
-import 'package:ndpl/app/routes/app_route.dart';
+import 'package:wajibmotors/app/core/utils/url_luncher.dart';
+import 'package:wajibmotors/app/data/local/storage.dart';
+import 'package:wajibmotors/app/routes/app_route.dart';
 
 import 'app/core/bindings/initial.dart';
 import 'app/core/constant/app_text.dart';
@@ -17,7 +16,6 @@ void main() async {
   Get.put(UrlLuncherController());
 
   final language = await LocalData().readData(key: "language");
-
 
   runApp(MyApp(languageType: (language.isEmpty) ? "bn" : language));
 }

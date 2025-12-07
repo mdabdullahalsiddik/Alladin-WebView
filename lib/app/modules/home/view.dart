@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ndpl/app/modules/home/controller.dart';
+import 'package:wajibmotors/app/modules/home/controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 /// Home View

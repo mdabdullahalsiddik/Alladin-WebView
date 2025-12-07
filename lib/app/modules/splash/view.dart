@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ndpl/app/core/constant/assets.dart';
-import 'package:ndpl/app/global_widgets/app_text.dart';
-import 'package:ndpl/app/modules/splash/controller.dart';
+import 'package:wajibmotors/app/core/constant/assets.dart';
+import 'package:wajibmotors/app/global_widgets/app_text.dart';
+import 'package:wajibmotors/app/modules/splash/controller.dart';
 
 class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
