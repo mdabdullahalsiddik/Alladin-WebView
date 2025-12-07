@@ -7,7 +7,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.1
 
 
 dependencies:
@@ -15,14 +15,14 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  get: ^4.7.2
+  get: ^4.7.3
   flutter_easyloading: ^3.0.5
   circular_bottom_navigation:
   flutter_widget_from_html_core: ^0.17.0
   package_info_plus:
   flutter_secure_storage: ^9.2.4
   url_launcher: ^6.3.2
-  connectivity_plus: ^6.1.5
+  connectivity_plus: ^7.0.0
   webview_flutter: ^4.13.0
 
   http: any
@@ -36,7 +36,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/icon.png"
+  image_path: "assets/logo.jpg"
 
   flutter_lints: ^6.0.0
 
@@ -45,18 +45,3 @@ flutter:
 
   assets:
     - assets/
-    - assets/images/
-    - assets/icons/
-    - assets/fonts/
-    # - assets/fonts/SutonnyMJ_Regular.ttf
-
-
-  fonts:
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter_18pt-ExtraLight.ttf
-        - asset: assets/fonts/Inter_18pt-ExtraLightItalic.ttf
-          weight: 700
-    - family: Bangla
-      fonts:
-        - asset: assets/fonts/SutonnyMJ_Regular.ttf

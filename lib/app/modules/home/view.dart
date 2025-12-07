@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wajibmotors/app/core/constant/assets.dart';
 import 'package:wajibmotors/app/modules/home/controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -37,7 +38,7 @@ class HomeView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'assets/logo.png', // Update your asset path
+                            AppAssets.logo, // Update your asset path
                             height: 250,
                             width: 250,
                             fit: BoxFit.cover,

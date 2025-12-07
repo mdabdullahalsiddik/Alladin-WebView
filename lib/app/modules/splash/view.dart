@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wajibmotors/app/core/constant/assets.dart';
-import 'package:wajibmotors/app/global_widgets/app_text.dart';
 import 'package:wajibmotors/app/modules/splash/controller.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -25,7 +24,11 @@ class SplashView extends GetView<SplashController> {
           if (controller.appVersion.isEmpty) {
             return const SizedBox();
           }
-          return CustomText("App Version :  ${controller.appVersion}", color: Theme.of(context).primaryColor, align: TextAlign.end);
+          return Text(
+            "App Version :  ${controller.appVersion}",
+            textAlign: TextAlign.end,
+            style: TextStyle(color: Theme.of(context).primaryColor),
+          );
         }),
       ),
     );

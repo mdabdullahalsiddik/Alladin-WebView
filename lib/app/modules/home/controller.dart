@@ -9,7 +9,6 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 /// HomeController for WebView
 class HomeController extends GetxController {
   final String url = "https://wajibmotors.classicecommerce.com/";
-  // final String url2 = "https://www.classicit.com.bd";
 
   late WebViewController webViewController;
   RxBool isLoading = true.obs;
@@ -52,7 +51,7 @@ class HomeController extends GetxController {
 
   /// Check internet and API status, then load appropriate URL
   Future<void> checkInternetAndLoad() async {
-    isLoading.value = true;
+  
 
     bool internetStatus = await ConnectionChecker.checkConnection();
     hasInternetConnection.value = internetStatus;
@@ -60,7 +59,7 @@ class HomeController extends GetxController {
     if (!internetStatus) {
       await Future.delayed(const Duration(seconds: 1));
       CommonSnackBarMessage.noInternetConnection();
-      isLoading.value = false;
+ 
       return;
     }
 
@@ -70,7 +69,7 @@ class HomeController extends GetxController {
     final Uri uriToLoad = Uri.parse(url);
 
     webViewController.loadRequest(uriToLoad);
-    isLoading.value = false;
+ 
   }
 
   /// Handle back button pressed
