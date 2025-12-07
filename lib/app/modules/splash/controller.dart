@@ -13,7 +13,7 @@ class SplashController extends GetxController {
     fetchAppVersion();
 
     await Future.delayed(const Duration(seconds: 3));
-    Get.offAllNamed(AppRoutes.navBar);
+    Get.offAllNamed(AppRoutes.home);
     // status = await LocalData().readData(key: "isLogin");
     // var isWelcome = await LocalData().readData(key: 'isWelcome');
     // log("===++===$isWelcome=========++====");
