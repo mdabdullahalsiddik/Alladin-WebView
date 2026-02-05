@@ -8,7 +8,7 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 /// HomeController for WebView
 class HomeController extends GetxController {
-  final String url = "https://wajibmotors.classicecommerce.com/";
+  final String url = "https://wajibmotors.dreampharmaa.com/";
 
   late WebViewController webViewController;
   RxBool isLoading = true.obs;
