@@ -1,6 +1,6 @@
  
 # Project Name
-    => wajibmotors
+    => vidsnap
 
 # Project Version & Date
 

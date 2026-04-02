@@ -1,4 +1,4 @@
-package com.classicit.wajibmotors;
+package com.classicit.vidsnap;
 
 import io.flutter.embedding.android.FlutterActivity;
 
