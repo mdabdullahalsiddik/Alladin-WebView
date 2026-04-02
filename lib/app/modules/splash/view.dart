@@ -1,35 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wajibmotors/app/core/constant/assets.dart';
-import 'package:wajibmotors/app/modules/splash/controller.dart';
+import 'package:vidsnap/app/core/constant/assets.dart';
+import 'package:vidsnap/app/modules/splash/controller.dart';
 
 class SplashView extends GetView<SplashController> {
-  const SplashView({super.key});
-
   @override
   Widget build(BuildContext context) {
-    // App-wide setup (SafeArea, EasyLoading)
     controller.setAppSettings(context: context);
-
-    // Trigger splash logic
-    controller.scheduleNavigationToNextScreen();
-
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(child: Image.asset(AppAssets.logo, height: MediaQuery.of(context).size.height / 2.5)),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        height: 30,
-        child: Obx(() {
-          if (controller.appVersion.isEmpty) {
-            return const SizedBox();
-          }
-          return Text(
-            "App Version :  ${controller.appVersion}",
-            textAlign: TextAlign.end,
-            style: TextStyle(color: Theme.of(context).primaryColor),
-          );
-        }),
+      body: Center(child: Image.asset(AppAssets.logo, height: 250, width: 250)),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          height: 30,
+          child: Obx(() {
+            if (controller.appVersion.isEmpty) {
+              return const SizedBox();
+            }
+            return Text(
+              "App Version : ${controller.appVersion}",
+              textAlign: TextAlign.end,
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+            );
+          }),
+        ),
       ),
     );
   }

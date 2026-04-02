@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wajibmotors/app/core/constant/assets.dart';
-import 'package:wajibmotors/app/modules/home/controller.dart';
+import 'package:vidsnap/app/modules/home/controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 /// Home View
@@ -24,10 +23,7 @@ class HomeView extends StatelessWidget {
             body: Stack(
               children: [
                 // Show WebView only if URL is loaded
-                if (controller.links.isNotEmpty)
-                  Positioned.fill(
-                    child: WebViewWidget(controller: controller.webViewController),
-                  ),
+                if (controller.links.isNotEmpty) Positioned.fill(child: WebViewWidget(controller: controller.webViewController)),
 
                 // Loading indicator
                 if (controller.isLoading.value)
@@ -37,13 +33,13 @@ class HomeView extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            AppAssets.logo, // Update your asset path
-                            height: 250,
-                            width: 250,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(height: 20),
+                          // Image.asset(
+                          //   AppAssets.logo, // Update your asset path
+                          //   height: 250,
+                          //   width: 250,
+                          //   fit: BoxFit.cover,
+                          // ),
+                          // const SizedBox(height: 20),
                           const CircularProgressIndicator(),
                         ],
                       ),
@@ -51,34 +47,20 @@ class HomeView extends StatelessWidget {
                   ),
 
                 // No internet
-                if (!controller.hasInternetConnection.value &&
-                    !controller.isLoading.value)
+                if (!controller.hasInternetConnection.value && !controller.isLoading.value)
                   Container(
                     color: Colors.white,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          const Icon(Icons.wifi_off,
-                              color: Colors.red, size: 50),
+                          const Icon(Icons.wifi_off, color: Colors.red, size: 50),
                           const SizedBox(height: 10),
-                          const Text(
-                            "Please, Check Internet Connection",
-                            style:
-                                TextStyle(color: Colors.blueGrey, fontSize: 15),
-                          ),
+                          const Text("Please, Check Internet Connection", style: TextStyle(color: Colors.blueGrey, fontSize: 15)),
                           SizedBox(height: MediaQuery.sizeOf(context).height / 3),
-                          InkWell(
-                            onTap: controller.checkInternetAndLoad,
-                            child: const Icon(Icons.refresh, size: 40),
-                          ),
-                          const Text(
-                            "Reload",
-                            style:
-                                TextStyle(color: Colors.blueGrey, fontSize: 15),
-                          ),
-                          SizedBox(
-                              height: MediaQuery.sizeOf(context).height / 10),
+                          InkWell(onTap: controller.checkInternetAndLoad, child: const Icon(Icons.refresh, size: 40)),
+                          const Text("Reload", style: TextStyle(color: Colors.blueGrey, fontSize: 15)),
+                          SizedBox(height: MediaQuery.sizeOf(context).height / 10),
                         ],
                       ),
                     ),

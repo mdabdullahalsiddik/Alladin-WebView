@@ -4,7 +4,7 @@ description: "A new Flutter project."
 publish_to: 'none' 
 
 
-version: 1.0.0+2
+version: 1.0.0+1
 
 environment:
   sdk: ^3.10.1
@@ -36,7 +36,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/logo.jpg"
+  image_path: "assets/logo.jpeg"
 
   flutter_lints: ^6.0.0
 

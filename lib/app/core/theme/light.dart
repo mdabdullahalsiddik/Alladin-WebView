@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wajibmotors/app/core/constant/app_color.dart';
+import 'package:vidsnap/app/core/constant/app_color.dart';
 
 class AppLightTheme {
   static ThemeData lightTheme = ThemeData(

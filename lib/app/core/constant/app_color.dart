@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 abstract class AppColor {
   // Light Theme
-  static const Color primaryLColor = Colors.blue;
+  static const Color primaryLColor = Color(0xff8d13fe);
   static const Color cardLColor = Color(0xffF9F9F9);
   static const Color textGreyLColor = Color(0xffc7c7c7);
   static const Color iconCLColor = Color(0xff1c2833);
@@ -16,6 +15,5 @@ abstract class AppColor {
   static const Color textBlackColor = Color(0xff000000);
   static const Color cardTextBlackColor = Color(0xff666C68);
 
- 
-   static const Color buttonBGColor = Color(0xffE7F3ED);
+  static const Color buttonBGColor = Color(0xffE7F3ED);
 }

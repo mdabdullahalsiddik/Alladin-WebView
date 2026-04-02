@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:wajibmotors/app/core/utils/network_checker.dart';
-import 'package:wajibmotors/app/core/utils/snackbar_message.dart';
+import 'package:vidsnap/app/core/utils/network_checker.dart';
+import 'package:vidsnap/app/core/utils/snackbar_message.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 /// HomeController for WebView
 class HomeController extends GetxController {
-  final String url = "https://wajibmotors.dreampharmaa.com/";
+  final String url = "https://vidsnap134.lovable.app";
 
   late WebViewController webViewController;
   RxBool isLoading = true.obs;
