@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class HomeController extends GetxController {
-  final String url = "https://vidsnap134.lovable.app/";
+  final String url = "https://vidsnap134-com.lovable.app/";
 
   RxBool isLoading = true.obs;
   RxBool hasInternetConnection = true.obs;
