@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:vidsnap/app/modules/home/controller.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-/// Home View
+import 'controller.dart';
+
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
@@ -12,61 +12,45 @@ class HomeView extends StatelessWidget {
     final HomeController controller = Get.put(HomeController());
 
     return SafeArea(
-      child: WillPopScope(
-        onWillPop: () async {
-          await controller.onBackPressed(context);
-          return false;
-        },
-        child: Obx(() {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: Stack(
-              children: [
-                // Show WebView only if URL is loaded
-                if (controller.links.isNotEmpty) Positioned.fill(child: WebViewWidget(controller: controller.webViewController)),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Obx(() {
+          return Stack(
+            children: [
+              /// 🌐 WebView
+              InAppWebView(
+                initialUrlRequest: URLRequest(url: WebUri(controller.url)),
 
-                // Loading indicator
-                if (controller.isLoading.value)
-                  Container(
-                    color: Colors.white,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Image.asset(
-                          //   AppAssets.logo, // Update your asset path
-                          //   height: 250,
-                          //   width: 250,
-                          //   fit: BoxFit.cover,
-                          // ),
-                          // const SizedBox(height: 20),
-                          const CircularProgressIndicator(),
-                        ],
-                      ),
-                    ),
-                  ),
+                initialSettings: InAppWebViewSettings(
+                  javaScriptEnabled: true,
+                  allowFileAccess: true,
+                  allowContentAccess: true,
+                  mediaPlaybackRequiresUserGesture: false,
+                  allowsInlineMediaPlayback: true,
+                ),
 
-                // No internet
-                if (!controller.hasInternetConnection.value && !controller.isLoading.value)
-                  Container(
-                    color: Colors.white,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Icon(Icons.wifi_off, color: Colors.red, size: 50),
-                          const SizedBox(height: 10),
-                          const Text("Please, Check Internet Connection", style: TextStyle(color: Colors.blueGrey, fontSize: 15)),
-                          SizedBox(height: MediaQuery.sizeOf(context).height / 3),
-                          InkWell(onTap: controller.checkInternetAndLoad, child: const Icon(Icons.refresh, size: 40)),
-                          const Text("Reload", style: TextStyle(color: Colors.blueGrey, fontSize: 15)),
-                          SizedBox(height: MediaQuery.sizeOf(context).height / 10),
-                        ],
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+                onWebViewCreated: (webController) {
+                  controller.setController(webController);
+                },
+
+                onLoadStart: (controllerWeb, url) {
+                  controller.isLoading.value = true;
+                },
+
+                onLoadStop: (controllerWeb, url) {
+                  controller.isLoading.value = false;
+                },
+
+                /// 🔥 FILE UPLOAD FIX (MAIN PART)
+              ),
+
+              /// ⏳ Loading
+              if (controller.isLoading.value)
+                Container(
+                  color: Colors.white,
+                  child: const Center(child: CircularProgressIndicator()),
+                ),
+            ],
           );
         }),
       ),

@@ -4,7 +4,7 @@ description: "A new Flutter project."
 publish_to: 'none' 
 
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ^3.10.1
@@ -17,14 +17,17 @@ dependencies:
 
   get: ^4.7.3
   flutter_easyloading: ^3.0.5
+  flutter_widget_from_html_core: ^0.17.0
   package_info_plus:
-  flutter_secure_storage: ^9.2.4
-  url_launcher: ^6.3.2
   connectivity_plus: ^7.0.0
   webview_flutter: ^4.13.0
-  webview_flutter_android: any
-  change_app_package_name: ^1.5.0
+  flutter_inappwebview: ^6.1.5
+  file_picker: ^11.0.2
   permission_handler: ^12.0.1
+
+  http: 
+  webview_flutter_android: 
+  change_app_package_name: ^1.5.0
 dev_dependencies:
 
   flutter_launcher_icons: "^0.14.3"
@@ -32,9 +35,14 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/logo.jpeg"
+  image_path: "assets/logo.png"
 
+  # Android adaptive icon background color
+  adaptive_icon_background: "#FFFFFF"   # এখানে আপনার bg color
+  adaptive_icon_foreground: "assets/logo.png"
   flutter_lints: ^6.0.0
+
+
 
 flutter:
   uses-material-design: true
