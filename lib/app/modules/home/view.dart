@@ -39,8 +39,6 @@ class HomeView extends GetView<HomeController> {
                 onLoadStop: (controllerWeb, url) {
                   controller.isLoading.value = false;
                 },
-
-                /// 🔥 FILE UPLOAD FIX (MAIN PART)
               ),
 
               /// ⏳ Loading

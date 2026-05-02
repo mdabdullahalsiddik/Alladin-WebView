@@ -1,7 +1,7 @@
+import 'package:alladin/app/core/constant/assets.dart';
+import 'package:alladin/app/modules/splash/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vidsnap/app/core/constant/assets.dart';
-import 'package:vidsnap/app/modules/splash/controller.dart';
 
 class SplashView extends GetView<SplashController> {
   @override

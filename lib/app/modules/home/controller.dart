@@ -1,6 +1,7 @@
+import 'package:alladin/app/core/utils/network_checker.dart';
+import 'package:alladin/app/routes/app_route.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class HomeController extends GetxController {
   final String url = "https://alladin134-com.lovable.app/";
@@ -12,5 +13,16 @@ class HomeController extends GetxController {
 
   void setController(InAppWebViewController controller) {
     webViewController = controller;
-  }
+  } 
+
+    Future<bool> internetCheck() async {
+    final hasConnection = await ConnectionChecker.checkConnection();
+
+    if (!hasConnection) {
+      Get.offAllNamed(AppRoutes.noInternet);
+      return false;
+    }
+    return true;
+  } 
+
 }

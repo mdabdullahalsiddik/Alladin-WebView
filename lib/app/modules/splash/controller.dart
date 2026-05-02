@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:alladin/app/core/utils/network_checker.dart';
+import 'package:alladin/app/core/utils/settings.dart';
+import 'package:alladin/app/routes/app_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:vidsnap/app/core/utils/settings.dart';
-import 'package:vidsnap/app/routes/app_route.dart';
 
 class SplashController extends GetxController {
   RxString appVersion = ''.obs;
@@ -14,21 +17,6 @@ class SplashController extends GetxController {
 
     await Future.delayed(const Duration(seconds: 3));
     Get.offAllNamed(AppRoutes.home);
-    // status = await LocalData().readData(key: "isLogin");
-    // var isWelcome = await LocalData().readData(key: 'isWelcome');
-    // log("===++===$isWelcome=========++====");
-    // log("======$status=============");
-
-    // if (isWelcome == "true") {
-    //   if (status == "true") {
-    //     Get.offAllNamed(AppRoutes.navBar);
-    //   } else {
-    //     // Get.offAllNamed(AppRoutes.login);
-    //     Get.offAllNamed(AppRoutes.navBar);
-    //   }
-    // } else {
-    //   Get.offAllNamed(AppRoutes.welcome);
-    // }
   }
 
   void fetchAppVersion() async {
@@ -45,8 +33,51 @@ class SplashController extends GetxController {
 
   @override
   void onInit() {
-    scheduleNavigationToNextScreen();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (await internetCheck()) {
+        await getData();
+      }
+    });
 
     super.onInit();
+  }
+
+  Future<void> getData() async {
+    await checkForUpdate();
+
+    await scheduleNavigationToNextScreen();
+  }
+
+  Future<bool> internetCheck() async {
+    final hasConnection = await ConnectionChecker.checkConnection();
+
+    if (!hasConnection) {
+      Get.offAllNamed(AppRoutes.noInternet);
+      return false;
+    }
+    return true;
+  }
+
+  // -------------------- APP UPDATE --------------------
+  Future<void> checkForUpdate() async {
+    try {
+      if (kDebugMode) {
+        log("Skip update check in debug mode");
+        return;
+      }
+
+      final AppUpdateInfo info = await InAppUpdate.checkForUpdate();
+
+      if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+        if (info.immediateUpdateAllowed) {
+          await InAppUpdate.performImmediateUpdate();
+        } else if (info.flexibleUpdateAllowed) {
+          await InAppUpdate.startFlexibleUpdate();
+          await InAppUpdate.completeFlexibleUpdate();
+        }
+      }
+    } catch (e) {
+      log("Update Error: $e");
+    }
   }
 }
