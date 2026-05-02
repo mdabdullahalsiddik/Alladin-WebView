@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.classicit.alladin"
+    namespace = "com.alladin.alladinecommerce"
     compileSdk = 36
     ndkVersion = "28.2.13676358"
 
@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.classicit.alladin"
+        applicationId = "com.alladin.alladinecommerce"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
@@ -31,10 +31,10 @@ android {
     }
     signingConfigs {
         create("release") {
-            keyAlias = "key"
-            keyPassword = "12345678910"
+            keyAlias = "upload"
+            keyPassword = "123456789"
             storeFile = file("upload-keystore.jks")
-            storePassword = "12345678910"
+            storePassword = "123456789"
         }
     }
     buildTypes {

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:vidsnap/app/modules/home/controller.dart';
-import 'package:vidsnap/app/modules/splash/controller.dart';
+import 'package:alladin/app/modules/home/controller.dart';
+import 'package:alladin/app/modules/splash/controller.dart';
 
 class InitialBinding extends Bindings {
   @override
