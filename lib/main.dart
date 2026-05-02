@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:vidsnap/app/routes/app_route.dart';
+import 'package:alladin/app/routes/app_route.dart';
 
 import 'app/core/bindings/initial.dart';
 import 'app/core/constant/app_text.dart';

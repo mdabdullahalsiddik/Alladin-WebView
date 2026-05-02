@@ -1,16 +1,15 @@
+import 'package:alladin/app/core/constant/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
 import 'controller.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final HomeController controller = Get.put(HomeController());
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -48,7 +47,7 @@ class HomeView extends StatelessWidget {
               if (controller.isLoading.value)
                 Container(
                   color: Colors.white,
-                  child: const Center(child: CircularProgressIndicator()),
+                  child: const Center(child: Image(image: AssetImage(AppAssets.logo), height: 100, width: 100)),
                 ),
             ],
           );

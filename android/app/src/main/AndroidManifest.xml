@@ -2,13 +2,12 @@
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <!-- Android 13+ support -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <application
-        android:label="Vidanap"
+        android:label="Alladin"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         

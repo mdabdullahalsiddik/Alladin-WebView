@@ -1,4 +1,4 @@
-package com.classicit.vidsnap;
+package com.classicit.alladin;
 
 import io.flutter.embedding.android.FlutterActivity;
 

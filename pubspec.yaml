@@ -1,4 +1,4 @@
-name: vidsnap
+name: alladin
 description: "A new Flutter project."
 
 publish_to: 'none' 
@@ -35,11 +35,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/logo.png"
+  image_path: "assets/app_icon.png"
 
   # Android adaptive icon background color
   adaptive_icon_background: "#FFFFFF"   # এখানে আপনার bg color
-  adaptive_icon_foreground: "assets/logo.png"
+  adaptive_icon_foreground: "assets/app_icon.png"
   flutter_lints: ^6.0.0
 
 
