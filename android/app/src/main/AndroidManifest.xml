@@ -4,8 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
 
-    <!-- Android 13+ support -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+
     <application
         android:label="Alladin"
         android:name="${applicationName}"
